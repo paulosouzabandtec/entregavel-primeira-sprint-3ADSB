@@ -13,7 +13,7 @@ public class TreinadorController {
 
     List<Treinador> treinadorList = new ArrayList<>();
 
-    @GetMapping("/listar-treinadores")
+    @GetMapping
     public ResponseEntity listarTodos() {
         if (treinadorList.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -22,7 +22,7 @@ public class TreinadorController {
         }
     }
 
-    @GetMapping("/listar-treinador/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity listarUmTreinador(@PathVariable Integer id) {
         if (treinadorList.size() >= id) {
             return ResponseEntity.ok(treinadorList.get(id - 1));
@@ -31,13 +31,13 @@ public class TreinadorController {
         }
     }
 
-    @PostMapping("/criar-treinador")
+    @PostMapping
     public ResponseEntity criarTreinador(@RequestBody Treinador treinador) {
         treinadorList.add(treinador);
         return ResponseEntity.status(201).build();
     }
 
-    @PutMapping("/atualizar-treinador/{id}")
+    @PutMapping("/id}")
     public ResponseEntity atualizarTreinador(@PathVariable Integer id, @RequestBody Treinador treinador) {
         if (treinadorList.size() >= id) {
             treinadorList.set(id - 1, treinador);
@@ -47,7 +47,7 @@ public class TreinadorController {
         }
     }
 
-    @DeleteMapping("/deletar-treinador/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deletarTreinador(@PathVariable Integer id) {
         if (treinadorList.size() >= id) {
             treinadorList.remove(id - 1);

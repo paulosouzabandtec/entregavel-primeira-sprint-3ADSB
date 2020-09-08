@@ -13,7 +13,7 @@ public class ProfessorPokemonController {
 
     List<ProfessorPokemon> professorList = new ArrayList<>();
 
-    @GetMapping("/listar-professores")
+    @GetMapping
     public ResponseEntity listarTodos() {
         if (professorList.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -22,7 +22,7 @@ public class ProfessorPokemonController {
         }
     }
 
-    @GetMapping("/listar-professor/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity listarUmProfessor(@PathVariable Integer id) {
         if (professorList.size() >= id) {
             return ResponseEntity.ok(professorList.get(id - 1));
@@ -31,13 +31,13 @@ public class ProfessorPokemonController {
         }
     }
 
-    @PostMapping("/criar-professor")
+    @PostMapping
     public ResponseEntity criarProfessor(@RequestBody ProfessorPokemon professor) {
         professorList.add(professor);
         return ResponseEntity.status(201).build();
     }
 
-    @PutMapping("/atualizar-professor/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity atualizarProfessor(@PathVariable Integer id, @RequestBody ProfessorPokemon professor) {
         if (professorList.size() >= id) {
             professorList.set(id - 1, professor);
@@ -47,7 +47,7 @@ public class ProfessorPokemonController {
         }
     }
 
-    @DeleteMapping("/deletar-professor/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deletarProfessor(@PathVariable Integer id) {
         if (professorList.size() >= id) {
             professorList.remove(id - 1);
