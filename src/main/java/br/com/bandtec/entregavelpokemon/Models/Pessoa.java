@@ -5,15 +5,13 @@ public abstract class Pessoa {
     private Integer idade;
     private String codigo;
 
-    public Pessoa(){};
-
-    public abstract Double salarioPokemonAoMes();
-
     public Pessoa(String nome, Integer idade, String codigo) {
         this.nome = nome;
         this.idade = idade;
         this.codigo = codigo;
     }
+
+    public abstract Double salarioPokemonAoMes();
 
     public String getNome() {
         return nome;

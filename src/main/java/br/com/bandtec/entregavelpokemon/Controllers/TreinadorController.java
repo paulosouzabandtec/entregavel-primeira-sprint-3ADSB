@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/treinadores")
@@ -28,6 +29,18 @@ public class TreinadorController {
             return ResponseEntity.ok(treinadorList.get(id - 1));
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/participantes-liga")
+    public ResponseEntity listarParticipantesLiga() {
+        List<Treinador> treinadores = treinadorList.stream()
+                .filter(treinador -> treinador.getQuantInsignias() >= 8)
+                .collect(Collectors.toList());
+        if (treinadores.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(treinadores);
         }
     }
 
